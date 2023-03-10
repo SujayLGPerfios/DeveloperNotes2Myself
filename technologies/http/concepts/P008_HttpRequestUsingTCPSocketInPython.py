@@ -7,14 +7,9 @@ tcpSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 tcpSocket.connect(('www.posttestserver.com', 80))
 
 # Create an HTTP GET Request message strictly adhering to the HTTP RFC 2616.
-httpRequestMessage = \
-"""GET /post.php HTTP/1.1
-Host: posttestserver.com
-Connection: close
-User-Agent: CPython/2.7.6 Linux/3.13.0-43-generic
-\n"""
-
+httpRequestMessage = b"GET / HTTP/1.1\r\nHost:www.posttestserver.com\r\n\r\n"
 tcpSocket.send(httpRequestMessage)
+
 while 1:
     data = tcpSocket.recv(1024)
     if not len(data):
